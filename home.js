@@ -34,62 +34,20 @@ document.querySelectorAll('.wall-row').forEach((row) => {
 const nav = document.getElementById('nav');
 const hook = document.querySelector('.hook');
 
-// ── 스크롤 진행도 (0~1): 그 칸이 화면을 얼마나 지나갔는지 ──
-function progress(el) {
-  const r = el.getBoundingClientRect();
-  const total = r.height - innerHeight;
-  return total <= 0 ? 0 : Math.min(1, Math.max(0, -r.top / total));
-}
-
-const story = document.querySelector('.story');
-const steps = [...document.querySelectorAll('.story-steps li')];
-const vids = [...document.querySelectorAll('.phone video')];
-const dots = [...document.querySelectorAll('.story-dots i')];
-const fillSec = document.querySelector('.fill');
 const fillLines = [...document.querySelectorAll('.fill-text span')];
-let current = -1;
-
-function showStep(i) {
-  if (i === current) return;
-  current = i;
-  steps.forEach((s, k) => s.classList.toggle('on', k === i));
-  dots.forEach((d, k) => d.classList.toggle('on', k === i));
-  vids.forEach((v, k) => {
-    const on = k === i;
-    v.classList.toggle('on', on);
-    if (on) {
-      v.preload = 'auto';
-      v.currentTime = 0;
-      v.play().catch(() => {});
-    } else {
-      v.pause();
-    }
-  });
-  // 다음 장면 영상은 미리 받아 둔다
-  if (vids[i + 1]) vids[i + 1].preload = 'auto';
-}
 
 function onScroll() {
-  const hp = progress(hook);
+  // 첫 화면: 내리는 만큼 글자가 살짝 내려가며 흐려진다 (화면은 멈추지 않는다)
+  const hp = Math.min(1, Math.max(0, scrollY / hook.offsetHeight));
   hook.style.setProperty('--p', reduce ? 0 : hp.toFixed(3));
   nav.classList.toggle('solid', hook.getBoundingClientRect().bottom < innerHeight * 0.55);
 
-  // 기능 5개: 진행도를 5칸으로 나눈다
-  const sr = story.getBoundingClientRect();
-  if (sr.top < innerHeight && sr.bottom > 0) {
-    const sp = progress(story);
-    showStep(Math.min(steps.length - 1, Math.floor(sp * steps.length * 0.999)));
-  } else if (current >= 0) {
-    vids[current].pause();
-  }
-
-  // 글자 차오르기: 줄마다 차례로
-  const fp = progress(fillSec);
-  fillLines.forEach((line, k) => {
-    const n = fillLines.length;
-    const local = Math.min(1, Math.max(0, fp * (n + 0.6) - k));
+  // 글자 차오르기: 줄이 화면 아래 85%에서 45%까지 올라오는 동안 채운다
+  for (const line of fillLines) {
+    const y = line.getBoundingClientRect().top + line.offsetHeight / 2;
+    const local = Math.min(1, Math.max(0, (innerHeight * 0.85 - y) / (innerHeight * 0.4)));
     line.style.setProperty('--f', (reduce ? 100 : local * 100).toFixed(1) + '%');
-  });
+  }
 }
 
 let ticking = false;
@@ -111,7 +69,7 @@ const io = new IntersectionObserver((entries) => {
       if (e.isIntersecting) { e.target.preload = 'auto'; e.target.play().catch(() => {}); } else e.target.pause();
     }
   }
-}, { threshold: 0.2 });
+}, { threshold: 0.35 });
 document.querySelectorAll('.reveal, video[data-autoplay]').forEach((el) => io.observe(el));
 
 // ── 광고 영상 창 (컴퓨터는 가로, 폰은 세로) ──

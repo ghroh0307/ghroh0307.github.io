@@ -34,7 +34,7 @@
 </nav>
 
 <!-- ① 오늘 저녁 뭐 해 먹지? -->
-<header class="hook" id="top" data-progress>
+<header class="hook" id="top">
  <div class="hook-stick">
   <div class="wall" aria-hidden="true">
     <div class="wall-row" data-row="0"></div>
@@ -61,29 +61,28 @@
   </div>
 </section>
 
-<!-- ③ 기능 5개: 폰은 멈춰 있고, 스크롤하면 화면과 문구가 바뀐다 -->
-<section class="story" id="features" data-progress>
-  <div class="story-stick">
-    <div class="story-copy">
-      <ol class="story-steps">
-        <li class="on"><span class="no">01</span><h3>내가 만든 요리들,<br><em>한눈에 모아 보기</em></h3><p>찍어 둔 요리 사진이 그대로 레시피 표지가 돼요. 분류는 내 마음대로.</p></li>
-        <li><span class="no">02</span><h3>재료부터 만드는 법까지<br><em>사진과 함께 차곡차곡</em></h3><p>재료는 이름과 양을 나눠 깔끔하게. 단계마다 사진, 불 세기, 참고할 점까지.</p></li>
-        <li><span class="no">03</span><h3>요리할 땐 큰 화면으로,<br><em>타이머는 알아서</em></h3><p>한 단계씩 큰 글씨로. 화면이 꺼져도, 무음이어도 알람이 울려요.</p></li>
-        <li><span class="no">04</span><h3>나만의 코스도 짜 보고<br><em>장보기까지 한 번에</em></h3><p>집들이처럼 여러 요리를 묶고, 재료는 버튼 하나로 장보기 목록에.</p></li>
-        <li><span class="no">05</span><h3>나만의 레시피를 카드로 만들어<br><em>간단하게 보내기</em></h3><p>예쁜 카드 한 장으로 카카오톡에. 받는 사람은 앱이 없어도 봐요.</p></li>
-      </ol>
-    </div>
-    <div class="story-phone">
-      <div class="phone">
-        <video muted playsinline loop preload="metadata" poster="media/f1_home.jpg" class="on"><source src="media/f1_home.mp4" type="video/mp4"></video>
-        <video muted playsinline loop preload="none" poster="media/f2_detail.jpg"><source src="media/f2_detail.mp4" type="video/mp4"></video>
-        <video muted playsinline loop preload="none" poster="media/f3_cook.jpg"><source src="media/f3_cook.mp4" type="video/mp4"></video>
-        <video muted playsinline loop preload="none" poster="media/f4_course.jpg"><source src="media/f4_course.mp4" type="video/mp4"></video>
-        <video muted playsinline loop preload="none" poster="media/f5_card.jpg"><source src="media/f5_card.mp4" type="video/mp4"></video>
-      </div>
-    </div>
-    <div class="story-dots" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i><i></i></div>
-  </div>
+<!-- ③ 기능 5개: 차례대로 내려가며 본다 (폰 영상은 보일 때 재생) -->
+<section class="story" id="features">
+  <article class="feat">
+    <div class="feat-copy reveal"><span class="no">01</span><h3>내가 만든 요리들,<br><em>한눈에 모아 보기</em></h3><p>찍어 둔 요리 사진이 그대로 레시피 표지가 돼요. 분류는 내 마음대로, 여러 개도 붙여요.</p></div>
+    <div class="feat-phone reveal"><div class="phone"><video muted playsinline loop preload="none" poster="media/f1_home.jpg" data-autoplay><source src="media/f1_home.mp4" type="video/mp4"></video></div></div>
+  </article>
+  <article class="feat rev">
+    <div class="feat-copy reveal"><span class="no">02</span><h3>재료부터 만드는 법까지<br><em>사진과 함께 차곡차곡</em></h3><p>재료는 이름과 양을 나눠 깔끔하게. 단계마다 사진, 불 세기, 참고할 점까지.</p></div>
+    <div class="feat-phone reveal"><div class="phone"><video muted playsinline loop preload="none" poster="media/f2_detail.jpg" data-autoplay><source src="media/f2_detail.mp4" type="video/mp4"></video></div></div>
+  </article>
+  <article class="feat">
+    <div class="feat-copy reveal"><span class="no">03</span><h3>요리할 땐 큰 화면으로,<br><em>타이머는 알아서</em></h3><p>한 단계씩 큰 글씨로. 화면이 꺼져도, 무음이어도 알람이 울려요.</p></div>
+    <div class="feat-phone reveal"><div class="phone"><video muted playsinline loop preload="none" poster="media/f3_cook.jpg" data-autoplay><source src="media/f3_cook.mp4" type="video/mp4"></video></div></div>
+  </article>
+  <article class="feat rev">
+    <div class="feat-copy reveal"><span class="no">04</span><h3>나만의 코스도 짜 보고<br><em>장보기까지 한 번에</em></h3><p>집들이처럼 여러 요리를 묶고, 재료는 버튼 하나로 장보기 목록에.</p></div>
+    <div class="feat-phone reveal"><div class="phone"><video muted playsinline loop preload="none" poster="media/f4_course.jpg" data-autoplay><source src="media/f4_course.mp4" type="video/mp4"></video></div></div>
+  </article>
+  <article class="feat">
+    <div class="feat-copy reveal"><span class="no">05</span><h3>나만의 레시피를 카드로 만들어<br><em>간단하게 보내기</em></h3><p>예쁜 카드 한 장으로 카카오톡에. 받는 사람은 앱이 없어도 봐요.</p></div>
+    <div class="feat-phone reveal"><div class="phone"><video muted playsinline loop preload="none" poster="media/f5_card.jpg" data-autoplay><source src="media/f5_card.mp4" type="video/mp4"></video></div></div>
+  </article>
 </section>
 
 <!-- ④ 종이비행기 → 띵동 -->
@@ -101,7 +100,7 @@
 </section>
 
 <!-- ⑤ 글자가 차오르는 문장 -->
-<section class="fill" data-progress>
+<section class="fill">
   <p class="fill-text">
     <span>로그인 없이도 다 돼요.</span>
     <span>로그인하면 폰을 바꿔도</span>
